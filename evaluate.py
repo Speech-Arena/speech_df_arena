@@ -3,6 +3,7 @@ import json
 from utils.evaluation_helper import evaluate_across_models_across_datasets
 import os
 from datetime import datetime
+from utils.metrics import compute_pooled_eer
 
 TIMESTAMP = datetime.now().strftime("%Y%m%d_%H%M%S")
 CHECKPOINTS_DIR = os.environ.get('DF_ARENA_CHECKPOINTS_DIR', '/data/code/df_arena_stuff/checkpoints/checkpoints')
@@ -24,14 +25,21 @@ def main():
 
     args = parser.parse_args()
 
-    results = evaluate_across_models_across_datasets(args, TIMESTAMP, CHECKPOINTS_DIR, PROTOCOL_FILES_DIR)
+    results = {}
+    results_avg = evaluate_across_models_across_datasets(args, TIMESTAMP, CHECKPOINTS_DIR, PROTOCOL_FILES_DIR)
+    results_pooled = compute_pooled_eer(results_avg, TIMESTAMP, PROTOCOL_FILES_DIR)
 
+    results['Average'] = results_avg
+    results['Pooled'] = results_pooled
     # Save all metrics to a single JSON file
+
     metrics_json_path = os.path.join("logs", f"summary_{TIMESTAMP}.json")
 
-    print(f"[blue] Summary of results: {results}[/blue]")
+    print(f"[blue] Summary of results: {results} [/blue]")
     with open(metrics_json_path, 'w') as f:
         json.dump(results, f, indent=4)
+
+
 
 if __name__ == "__main__":
     main()

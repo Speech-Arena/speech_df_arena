@@ -66,6 +66,6 @@ Example usage :
 - `--fix_length` Whether to trim audio to 4 seconds for evaluation. Used by almost all the open source models.
 - `--num_workers <int>` Number of pytorch workers to use \
 
-Running above cli generates `./logs` and `./scores directories to store the progress logs and score files for every model. Once the evalution is complete, a summary file is generated inside `./logs`
+Running above cli generates `./logs` and `./scores` directories to store the logs and score files. Each run creates seperate directories based on the timestamp. Both average and pooled results are computed. Pooled results are computed based on the global threshold obtained on the datasets involded in that particular run for every model involved. Average results are computed by simply averaging the results obtained across datasets involded in that particular run every the model.
 
 Score files for benchmarked systems can be found [here](https://drive.google.com/file/d/1pI-tvCZt4U__gGGLsCQMdZqLv_QBe4NW/view?usp=sharing)

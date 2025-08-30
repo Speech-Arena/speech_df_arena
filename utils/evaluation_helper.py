@@ -49,14 +49,14 @@ def evaluate_across_models_across_datasets(args, timestamp, checkpoints_dir, pro
 
         for protocol in protocols:
             protocol_path = f'{protocol_files_dir}/{protocol}.csv'
-            out_score_file = f'./scores/{model}_{timestamp}/{protocol}.txt'
+            out_score_file = f'./scores/scores_{timestamp}/{model}/{protocol}.txt'
             _model.out_score_file_name = out_score_file
 
             if not os.path.exists(protocol_path):
                 print(f"[red]Protocol file not found: {protocol}[/red]")
                 continue
 
-            log_file = f'./logs/{model}_{timestamp}/{protocol}.log'
+            log_file = f'./logs/logs_{timestamp}/{model}/{protocol}.log'
 
             os.makedirs(os.path.dirname(out_score_file), exist_ok=True)
             os.makedirs(os.path.dirname(log_file), exist_ok=True)

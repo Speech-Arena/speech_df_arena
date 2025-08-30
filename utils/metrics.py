@@ -135,3 +135,44 @@ def compute_metrics(score_file, protocol_file):
     f1, accuracy = compute_f1_accuracy(bonafide_scores, spoof_scores, threshold)
 
     return {"EER (%)": float(eer*100), "Threshold": float(threshold), "F1-score": float(f1), "Accuracy (%)": float(accuracy*100)}
+
+def compute_pooled_eer(resultds_dict, TIMESTAMP, PROTOCOL_FILES_DIR):
+    pooled_eers = {}
+    pooled_f1 = {}
+    pooled_acc = {}
+    pooled_thr = {}
+
+    res_pooled = {}
+    for model in resultds_dict:
+
+        all_scores = []
+        all_metadata = []
+
+        for score_file in resultds_dict[model]:
+            score_path = f'./scores/scores_{TIMESTAMP}/{model}/{score_file}.txt'
+            metadata_path = f'{PROTOCOL_FILES_DIR}/{score_file}.csv'
+
+            # Load and store scores and metadata
+            df_scores = pd.read_csv(score_path, sep=' ', names=['file_name', 'cm_score'])
+            df_meta = pd.read_csv(metadata_path)
+
+            # Align scores and metadata
+            df_scores = df_scores.set_index('file_name')
+            df_meta = df_meta.set_index('file_name')
+            df_combined = df_meta.join(df_scores, how='inner').reset_index()
+
+            all_scores.append(df_combined)
+
+        # Combine all datasets for that model
+        pooled_df = pd.concat(all_scores, ignore_index=True)
+        
+        # Save to temporary files for reuse in compute_metrics
+        pooled_df[['file_name', 'cm_score']].to_csv(f'./scores/scores_{TIMESTAMP}/{model}/pooled_scores.txt', sep=' ', index=False, header=False)
+        pooled_df[['file_name', 'label']].to_csv(f'./scores/scores_{TIMESTAMP}/{model}/pooled_metadata.csv', index=False)
+
+        # Use existing compute_metrics function
+        pooled_res = compute_metrics(f'./scores/scores_{TIMESTAMP}/{model}/pooled_scores.txt',
+                                      f'./scores/scores_{TIMESTAMP}/{model}/pooled_metadata.csv')
+
+        res_pooled[model] = pooled_res
+    return res_pooled
