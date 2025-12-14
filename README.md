@@ -19,8 +19,25 @@ Currently supported models:
 - [Wav2Vec2 AASIST](https://arxiv.org/pdf/2202.12233)  
 - [Nes2NetX](https://arxiv.org/pdf/2504.05657)
 
+Datasets on the leaderboard can be obtained from:
+- [ASVSpoof2019](https://zenodo.org/records/6906306)
+- [ASVSpoof2021LA](https://zenodo.org/records/4837263)
+- [ASVSpoof2021DF](https://zenodo.org/records/4837263)
+- [ASVSpoof2024-Eval](https://zenodo.org/records/14498691)
+- [FakeOrReal](https://bil.eecs.yorku.ca/share/for-norm.tar.gz)
+- [Codecfake Yuankun et. al.](https://github.com/xieyuankun/Codecfake)
+- [ADD 2022 Track 1](https://zenodo.org/records/10843991)
+- [ADD 2022 Track 3](https://zenodo.org/records/12188055)
+- [ADD 2023 R1](https://zenodo.org/records/12175884)
+- [ADD 2023 R2](https://zenodo.org/records/12176326)
+- [DFADD](https://github.com/isjwdu/DFADD)
+- [LibriVoc](https://zenodo.org/records/15127251)
+- [SONAR](https://github.com/Jessegator/SONAR)
+- [In The Wild](https://deepfake-total.com/in_the_wild)
+
+
 # Usage 							
-### 1. Preparation 
+## 1. Environment Setup
 
 Before you proceed you need to set two environment variables
 ```
@@ -36,20 +53,22 @@ NOTE-
 - The configuration settings from the original config files for AASIST, RawNet2 and RawGatST have been hardcoded in the model definitions inside `./Models`
 - Checkpoints and configuration files for some of the systems currently on the leaderboard can be found [here](https://drive.google.com/file/d/1iajJbXtrTDgyvxQYBA44V9_-nd9RaMzj/view?usp=sharing) 
 
-## 2. Create metadata.csv for any desired dataset with below format:
+## 2. Data Preparation
+
+We support evaluation on any custom or existing dataset. Simply create metadata.csv for any desired dataset as stated below :
+
+
 ```
 file_name,label
-/path/to/audio1,spoof
-/path/to/audio2,bonafide
+absolute/path/to/audio1,spoof
+absolute/path/to/audio2,bonafide
 ...
 
 ```
 NOTE : The labels should contain "spoof" for spoofed samples and "bonafide" for real samples.
-       All the file_name paths should be absolute 
+       All the paths should be absolute 
 
 ### 3. Evaluation
-
-
 
 Example usage : 
 `$python evaluate.py [options]`
