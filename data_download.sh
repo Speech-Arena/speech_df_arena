@@ -1,0 +1,14 @@
+wget https://zenodo.org/records/6906306
+wget https://zenodo.org/records/4837263
+wget https://zenodo.org/records/4837263
+wget https://zenodo.org/records/14498691
+wget https://bil.eecs.yorku.ca/share/fonorm.tar.gz 
+wget https://github.com/xieyuankun/Codecfake 
+wget https://zenodo.org/records/10843991 
+wget https://zenodo.org/records/12188055
+wget https://zenodo.org/records/12175884
+wget https://zenodo.org/records/12176326
+wget https://github.com/isjwdu/DFADD
+wget https://zenodo.org/records/15127251
+wget https://github.com/Jessegator/SONAR
+wget https://deepfake-total.com/in_the_wild
