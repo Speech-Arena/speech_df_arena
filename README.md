@@ -15,14 +15,14 @@ Datasets on the leaderboard can be obtained from:
 - [ASVSpoof2021DF](https://zenodo.org/records/4837263)
 - [ASVSpoof2024-Eval](https://zenodo.org/records/14498691)
 - [FakeOrReal](https://bil.eecs.yorku.ca/share/for-norm.tar.gz)
-- [Codecfake Yuankun et. al.](https://github.com/xieyuankun/Codecfake)
+- [Codecfake Yuankun et. al. Ensure to use Version 1 and not 2](https://zenodo.org/records/11169781)
 - [ADD 2022 Track 1](https://zenodo.org/records/10843991)
 - [ADD 2022 Track 3](https://zenodo.org/records/12188055)
 - [ADD 2023 R1](https://zenodo.org/records/12175884)
 - [ADD 2023 R2](https://zenodo.org/records/12176326)
 - [DFADD](https://github.com/isjwdu/DFADD)
 - [LibriVoc](https://zenodo.org/records/15127251)
-- [SONAR](https://github.com/Jessegator/SONAR)
+- [SONAR We use an old archived version](https://drive.google.com/file/d/1UBfih4BUDA29rmDtPhUibX-5Xqy2XNlQ/view?usp=sharing)
 - [In The Wild](https://deepfake-total.com/in_the_wild)
 
 We provide `download.sh` to download the datasets
